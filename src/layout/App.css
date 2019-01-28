@@ -1,0 +1,41 @@
+.App-header {
+  grid-area: Header;
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.React-header {
+  padding: 30px;
+  flex: 1;
+}
+
+.Cats-header {
+  padding: 30px;
+  flex: 2;
+}
+
+.App-header img {
+  max-height: 150px;
+}
+
+.React-header img {
+  animation: App-logo-spin infinite 20s linear;
+  width: fit-content;
+}
+
+.App-header a {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

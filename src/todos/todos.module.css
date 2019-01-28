@@ -1,0 +1,45 @@
+.main {
+  grid-area: Todos;
+  padding: 20px;
+}
+
+form {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input[type='text'] {
+  flex: 1;
+  margin: 0 10px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  cursor: pointer;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  display: flex;
+}
+li + li {
+  margin-top: 10px;
+}
+li:hover {
+  border-color: lightslategrey;
+}
+li > span {
+  flex: 1;
+  line-height: 40px;
+}
+
+.remove-button {
+  font-size: x-large;
+}
+.completed {
+  text-decoration: line-through;
+}

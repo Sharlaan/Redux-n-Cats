@@ -1,0 +1,42 @@
+.Todos {
+  grid-area: Todos;
+  padding: 20px;
+}
+
+.Todos form {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Todos form input[type='text'] {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.Todos ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.Todos li {
+  cursor: pointer;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  display: flex;
+}
+.Todos li:hover {
+  border-color: lightslategrey;
+}
+.Todos li > span {
+  flex: 1;
+  line-height: 40px;
+}
+.Todos li > button {
+  font-size: x-large;
+}
+
+.Todos .completed {
+  text-decoration: line-through;
+}
