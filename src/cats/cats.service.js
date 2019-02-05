@@ -1,6 +1,6 @@
-import { CATS_API_KEY, CATS_API_URL, DEFAULt_NB_IMG } from './cats.constants';
+import { CATS_API_KEY, CATS_API_URL, DEFAULT_NB_IMG } from './cats.constants';
 
-export async function getImages(types, nbImages = DEFAULt_NB_IMG) {
+export async function getImages(types, nbImages = DEFAULT_NB_IMG) {
   // axios.defaults.headers.common['x-api-key'] = CATS_API_KEY; // Replace this with your API Key
 
   // const params = {

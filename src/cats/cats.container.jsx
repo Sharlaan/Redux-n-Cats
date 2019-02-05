@@ -1,7 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const CatsContainer = ({ error, isFetching, urls }) => {
+export default () => {
+  const { error, isFetching, urls } = useSelector(({ cats: { error, isFetching, urls } }) => ({
+    error,
+    isFetching,
+    urls,
+  }));
+
   if (error)
     return (
       <p>
@@ -22,7 +28,3 @@ const CatsContainer = ({ error, isFetching, urls }) => {
     </section>
   );
 };
-
-const mapStateToProps = ({ cats: { error, isFetching, urls } }) => ({ error, isFetching, urls });
-
-export default connect(mapStateToProps)(CatsContainer);

@@ -9,7 +9,7 @@ export default ({ todo: { id, text, isCompleted }, remove }) => (
       className={`round-button ${styles['remove-button']}`}
       onClick={(event) => {
         event.stopPropagation();
-        remove(id);
+        remove();
       }}
     >
       x
