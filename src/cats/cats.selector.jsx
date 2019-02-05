@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchByType } from './cats.actions';
@@ -7,46 +7,53 @@ const TYPES = ['gif', 'jpg,png', 'jpg,png,gif'];
 
 const MAX_IMAGES = 10;
 
-class CatsSelector extends Component {
-  state = { nbImg: 4 };
+function CatsSelector({ changeType }) {
+  const [nbImg, setNbImg] = useState(4);
+  // const [imgType, setImgType] = useState(TYPES[0]);
+  const selectEl = useRef(TYPES[0]);
 
-  componentDidMount() {
-    this.props.changeType(TYPES[0]);
-  }
+  useEffect(() => {
+    changeType(TYPES[0]);
+  }, []); // called only on mount
 
-  handleChange = ({ target }) =>
-    this.props.changeType(target.value, this.nb.value);
-
-  handleRefresh = () => this.props.changeType(this.select.value, this.nb.value);
-
-  handleNumber = ({ target }) => {
-    const nbImg = Math.min(target.value, MAX_IMAGES);
-    this.setState({ nbImg });
-    this.props.changeType(this.select.value, nbImg);
+  const handleChangeImgType = ({ target }) => {
+    // setImgType(target.value);
+    changeType(target.value, nbImg);
   };
 
-  render() {
-    return (
-      <section>
-        <input
-          ref={(s) => (this.nb = s)}
-          type="number"
-          value={this.state.nbImg}
-          onChange={this.handleNumber}
-        />
-        <select ref={(s) => (this.select = s)} onChange={this.handleChange}>
-          {TYPES.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-        <button type="button" onClick={this.handleRefresh}>
-          Refresh
-        </button>
-      </section>
-    );
-  }
+  const handleChangeNbImg = ({ target }) => {
+    const newNbImg = Math.min(target.value, MAX_IMAGES);
+    setNbImg(newNbImg);
+    // changeType(imgType, newNbImg);
+    changeType(selectEl.current.value, newNbImg);
+  };
+
+  const handleRefresh = () => {
+    // changeType(imgType, nbImg);
+    changeType(selectEl.current.value, nbImg);
+  };
+
+  return (
+    <section>
+      <input type="number" value={nbImg} onChange={handleChangeNbImg} />
+
+      <select
+        ref={selectEl}
+        /* value={imgType} */
+        onChange={handleChangeImgType}
+      >
+        {TYPES.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+
+      <button type="button" onClick={handleRefresh}>
+        Refresh
+      </button>
+    </section>
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({
