@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { add, reset } from './todos.actions';
-
 const ResetButton = ({ onClick }) => (
   <button type="reset" onClick={onClick}>
     Reset
@@ -25,7 +23,7 @@ function TodosForm({ add, reset }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    text.value.length && add(text.value, showID.checked);
+    text.value.length && add({ text: text.value, showID: showID.checked });
   };
 
   return (
@@ -56,12 +54,9 @@ const useFormCheckbox = (initialValue) => {
   return { checked: value, onChange: handleChange };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  add: (todo, showID) => dispatch(add(todo, showID)),
-  reset: () => dispatch(reset()),
-});
+const mapDispatch = ({ todos: { add, reset } }) => ({ add, reset });
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatch,
 )(TodosForm);

@@ -23,10 +23,10 @@ const CatsContainer = ({ error, isFetching, urls }) => {
   );
 };
 
-const mapStateToProps = ({ cats: { error, isFetching, urls } }) => ({
+const mapState = ({ cats: { error, isFetching, urls } }) => ({
   error,
   isFetching,
   urls,
 });
 
-export default connect(mapStateToProps)(CatsContainer);
+export default connect(mapState)(CatsContainer);

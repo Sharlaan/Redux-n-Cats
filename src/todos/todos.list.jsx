@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { remove, toggle } from './todos.actions';
 import ListItem from './todos.item';
 
-const TodosList = ({ todos, toggle, remove }) => (
+const TodosList = ({ todos, remove, toggle }) => (
   <ul onClick={(event) => toggle(event.target.id)}>
     {todos.length ? (
       todos.map((todo) => (
@@ -21,14 +20,11 @@ const TodosList = ({ todos, toggle, remove }) => (
   </ul>
 );
 
-const mapStateToProps = ({ todos }) => ({ todos });
+const mapState = ({ todos }) => ({ todos });
 
-const mapDispatchToProps = (dispatch) => ({
-  toggle: (id) => dispatch(toggle(id)),
-  remove: (id) => dispatch(remove(id)),
-});
+const mapDispatch = ({ todos: { remove, toggle } }) => ({ remove, toggle });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  mapState,
+  mapDispatch,
 )(TodosList);

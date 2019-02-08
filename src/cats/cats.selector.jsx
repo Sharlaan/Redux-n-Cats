@@ -1,47 +1,34 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchByType } from './cats.actions';
-
 const TYPES = ['gif', 'jpg,png', 'jpg,png,gif'];
 
+const DEFAULT_NB_IMAGES = 4;
 const MAX_IMAGES = 10;
 
 function CatsSelector({ changeType }) {
-  const [nbImg, setNbImg] = useState(4);
-  // const [imgType, setImgType] = useState(TYPES[0]);
+  const [nbImg, setNbImg] = useState(DEFAULT_NB_IMAGES);
   const selectEl = useRef(TYPES[0]);
 
   useEffect(() => {
-    changeType(TYPES[0]);
-  }, []); // called only on mount
-
-  const handleChangeImgType = ({ target }) => {
-    // setImgType(target.value);
-    changeType(target.value, nbImg);
-  };
+    changeType(TYPES[0], DEFAULT_NB_IMAGES);
+  }, []); // Called only on mount
 
   const handleChangeNbImg = ({ target }) => {
     const newNbImg = Math.min(target.value, MAX_IMAGES);
     setNbImg(newNbImg);
-    // changeType(imgType, newNbImg);
     changeType(selectEl.current.value, newNbImg);
   };
 
-  const handleRefresh = () => {
-    // changeType(imgType, nbImg);
-    changeType(selectEl.current.value, nbImg);
-  };
+  const handleChangeImgType = ({ target }) => changeType(target.value, nbImg);
+
+  const handleRefresh = () => changeType(selectEl.current.value, nbImg);
 
   return (
     <section>
       <input type="number" value={nbImg} onChange={handleChangeNbImg} />
 
-      <select
-        ref={selectEl}
-        /* value={imgType} */
-        onChange={handleChangeImgType}
-      >
+      <select ref={selectEl} onChange={handleChangeImgType}>
         {TYPES.map((o) => (
           <option key={o} value={o}>
             {o}
@@ -56,11 +43,11 @@ function CatsSelector({ changeType }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  changeType: (type, nb) => dispatch(fetchByType(type, nb)),
+const mapDispatch = ({ cats: { fetchByType } }) => ({
+  changeType: (type, nb) => fetchByType({ type, nb }),
 });
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatch,
 )(CatsSelector);

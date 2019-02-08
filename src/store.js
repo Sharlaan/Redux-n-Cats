@@ -1,19 +1,5 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { init } from '@rematch/core';
+import * as models from './models';
 
-import todosReducer from './todos/todos.reducer';
-import catsReducer from './cats/cats.reducer';
-
-const rootReducer = combineReducers({
-  cats: catsReducer,
-  todos: todosReducer,
-});
-
-const composedEnhancers = composeWithDevTools(applyMiddleware(thunk));
-
-export default createStore(
-  rootReducer,
-  /* preloadedState, */
-  composedEnhancers,
-);
+// Note: Rematch works with Redux Devtools out of the box. No configuration required.
+export default init({ models });
