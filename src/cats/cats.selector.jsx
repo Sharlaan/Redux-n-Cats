@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchByType } from './cats.actions';
+import React, { useContext, useEffect, useState } from 'react';
 import { DEFAULT_NB_IMG, IMG_TYPES, MAX_IMAGES } from './cats.constants';
+import { CatsStore } from './cats.provider';
 
 export default function CatsSelector() {
-  const dispatch = useDispatch();
+  const { fetchByType } = useContext(CatsStore);
   const [nbImg, setNbImg] = useState(DEFAULT_NB_IMG);
   const [imgType, setImgType] = useState(IMG_TYPES[0]);
+
+  useEffect(
+    () => {
+      fetchByType(imgType, nbImg);
+    },
+    [imgType, nbImg], // eslint-disable-line
+  );
 
   const handleChangeImgType = ({ target }) => setImgType(target.value);
 
@@ -15,7 +21,7 @@ export default function CatsSelector() {
     setNbImg(newNbImg);
   };
 
-  const handleRefresh = () => dispatch(fetchByType(imgType, nbImg));
+  const handleRefresh = () => fetchByType(imgType, nbImg);
 
   return (
     <section>

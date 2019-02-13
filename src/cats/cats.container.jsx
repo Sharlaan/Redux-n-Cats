@@ -1,12 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { CatsStore } from './cats.provider';
 
-export default () => {
-  const { error, isFetching, urls } = useSelector(({ cats: { error, isFetching, urls } }) => ({
-    error,
-    isFetching,
-    urls,
-  }));
+export default function CatsContainer() {
+  const { error, isFetching, urls } = useContext(CatsStore);
 
   if (error)
     return (
@@ -27,4 +23,4 @@ export default () => {
       ))}
     </section>
   );
-};
+}
