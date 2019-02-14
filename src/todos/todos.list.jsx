@@ -1,34 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useActions, useStore } from 'easy-peasy';
 
-import { remove, toggle } from './todos.actions';
 import ListItem from './todos.item';
 
-const TodosList = ({ todos, toggle, remove }) => (
-  <ul onClick={(event) => toggle(event.target.id)}>
-    {todos.length ? (
-      todos.map((todo) => (
-        <ListItem key={todo.id} todo={todo} remove={remove} />
-      ))
-    ) : (
-      <p>
-        Todo list is empty, please add something
-        <span role="img" aria-label="Smiling face and 'on fire' mood">
-          😉🔥
-        </span>
-      </p>
-    )}
-  </ul>
-);
+export default function TodosList() {
+  const todos = useStore(({ todos }) => todos.items);
+  const { remove, toggle } = useActions(({ todos }) => ({
+    remove: todos.remove,
+    toggle: todos.toggle,
+  }));
 
-const mapStateToProps = ({ todos }) => ({ todos });
-
-const mapDispatchToProps = (dispatch) => ({
-  toggle: (id) => dispatch(toggle(id)),
-  remove: (id) => dispatch(remove(id)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TodosList);
+  return (
+    <ul onClick={(event) => toggle(event.target.id)}>
+      {todos.length ? (
+        todos.map((todo) => (
+          <ListItem key={todo.id} todo={todo} remove={remove} />
+        ))
+      ) : (
+        <p>
+          Todo list is empty, please add something
+          <span role="img" aria-label="Smiling face and 'on fire' mood">
+            😉🔥
+          </span>
+        </p>
+      )}
+    </ul>
+  );
+}

@@ -1,19 +1,12 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore } from 'easy-peasy';
 
-import todosReducer from './todos/todos.reducer';
-import catsReducer from './cats/cats.reducer';
+import catsModel from './cats/cats.model';
+import todosModel from './todos/todos.model';
 
-const rootReducer = combineReducers({
-  cats: catsReducer,
-  todos: todosReducer,
-});
+const rootModel = {
+  cats: catsModel,
+  todos: todosModel,
+};
 
-const composedEnhancers = composeWithDevTools(applyMiddleware(thunk));
-
-export default createStore(
-  rootReducer,
-  /* preloadedState, */
-  composedEnhancers,
-);
+// redux-devTools are built-in
+export default createStore(rootModel);

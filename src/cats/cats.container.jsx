@@ -1,7 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useStore } from 'easy-peasy';
 
-const CatsContainer = ({ error, isFetching, urls }) => {
+export default function CatsContainer() {
+  const { error, isFetching, urls } = useStore(({ cats }) => ({
+    error: cats.error,
+    isFetching: cats.isFetching,
+    urls: cats.urls,
+  }));
+
   if (error)
     return (
       <p>
@@ -21,12 +27,4 @@ const CatsContainer = ({ error, isFetching, urls }) => {
       ))}
     </section>
   );
-};
-
-const mapStateToProps = ({ cats: { error, isFetching, urls } }) => ({
-  error,
-  isFetching,
-  urls,
-});
-
-export default connect(mapStateToProps)(CatsContainer);
+}
