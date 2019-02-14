@@ -1,37 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { connect } from 'react-redux';
-
-import { fetchByType } from './cats.actions';
+import { useActions } from 'easy-peasy';
 
 const TYPES = ['gif', 'jpg,png', 'jpg,png,gif'];
 
 const MAX_IMAGES = 10;
 
-function CatsSelector({ changeType }) {
+export default function CatsSelector() {
+  const changeType = useActions(({ cats }) => cats.getByType);
   const [nbImg, setNbImg] = useState(4);
-  // const [imgType, setImgType] = useState(TYPES[0]);
   const selectEl = useRef(TYPES[0]);
 
   useEffect(() => {
-    changeType(TYPES[0]);
+    changeType({ type: TYPES[0] });
   }, []); // called only on mount
-
-  const handleChangeImgType = ({ target }) => {
-    // setImgType(target.value);
-    changeType(target.value, nbImg);
-  };
 
   const handleChangeNbImg = ({ target }) => {
     const newNbImg = Math.min(target.value, MAX_IMAGES);
     setNbImg(newNbImg);
-    // changeType(imgType, newNbImg);
-    changeType(selectEl.current.value, newNbImg);
+    changeType({ type: selectEl.current.value, nb: newNbImg });
   };
 
-  const handleRefresh = () => {
-    // changeType(imgType, nbImg);
-    changeType(selectEl.current.value, nbImg);
-  };
+  const handleChangeImgType = ({ target }) =>
+    changeType({ type: target.value, nb: nbImg });
+
+  const handleRefresh = () =>
+    changeType({ type: selectEl.current.value, nb: nbImg });
 
   return (
     <section>
@@ -55,12 +48,3 @@ function CatsSelector({ changeType }) {
     </section>
   );
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  changeType: (type, nb) => dispatch(fetchByType(type, nb)),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(CatsSelector);

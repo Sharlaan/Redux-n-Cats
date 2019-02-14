@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-
-import { add, reset } from './todos.actions';
+import { useActions } from 'easy-peasy';
 
 const ResetButton = ({ onClick }) => (
   <button type="reset" onClick={onClick}>
@@ -19,13 +17,17 @@ const Checkbox = (props) => <input type="checkbox" {...props} />;
 
 const TextField = (props) => <input type="text" {...props} />;
 
-function TodosForm({ add, reset }) {
+export default function TodosForm() {
+  const { add, reset } = useActions(({ todos }) => ({
+    add: todos.add,
+    reset: todos.reset,
+  }));
   const showID = useFormCheckbox(true);
   const text = useFormInput('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    text.value.length && add(text.value, showID.checked);
+    text.value.length && add({ text: text.value, showID: showID.checked });
   };
 
   return (
@@ -55,13 +57,3 @@ const useFormCheckbox = (initialValue) => {
   const handleChange = (event) => setValue(event.target.checked);
   return { checked: value, onChange: handleChange };
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  add: (todo, showID) => dispatch(add(todo, showID)),
-  reset: () => dispatch(reset()),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(TodosForm);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import { StoreProvider as Provider } from 'easy-peasy';
 
 import store from './store';
 import './index.css';
