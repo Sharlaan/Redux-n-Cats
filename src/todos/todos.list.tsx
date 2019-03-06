@@ -1,5 +1,5 @@
 import React from 'react';
-import { useActions, useStore } from 'easy-peasy';
+import { useActions, useStore } from '../hooks';
 
 import ListItem from './todos.item';
 
@@ -11,7 +11,11 @@ export default function TodosList() {
   }));
 
   return (
-    <ul onClick={(event) => toggle(event.target.id)}>
+    <ul
+      onClick={(event: React.MouseEvent) =>
+        toggle((event.target as HTMLLIElement).id)
+      }
+    >
       {todos.length ? (
         todos.map((todo) => (
           <ListItem key={todo.id} todo={todo} remove={remove} />

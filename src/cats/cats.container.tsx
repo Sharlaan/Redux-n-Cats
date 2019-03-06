@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStore } from 'easy-peasy';
+import { useStore } from '../hooks';
 
 export default function CatsContainer() {
   const { error, isFetching, urls } = useStore(({ cats }) => ({

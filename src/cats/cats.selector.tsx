@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useActions } from 'easy-peasy';
+import { useActions } from '../hooks';
+import { MimeTypes } from '../_api';
 
-const TYPES = ['gif', 'jpg,png', 'jpg,png,gif'];
+const TYPES: MimeTypes[] = ['gif', 'jpg,png', 'jpg,png,gif'];
 
 const MAX_IMAGES = 10;
 

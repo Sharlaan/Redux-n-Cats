@@ -1,7 +1,21 @@
+export type MimeTypes = 'gif' | 'jpg,png' | 'jpg,png,gif';
+
+// Cats API Docs : https://docs.thecatapi.com/api-reference/images/images-get
+type ImageSchema = {
+  id: string;
+  sub_id: string;
+  url: string;
+  original_filename: string;
+  created_at: Date;
+  categories: object[];
+  breeds: object[];
+};
+
 const CATS_API_URL = 'https://api.thecatapi.com/v1/images/search';
+
 const CATS_API_KEY = 'cf73a31c-2ec9-4d54-845b-6f0acba615d3';
 
-export default async function getImages(types, nbImages = 4) {
+export default async function getImages(types: MimeTypes, nbImages = 4) {
   // axios.defaults.headers.common['x-api-key'] = CATS_API_KEY; // Replace this with your API Key
 
   // const params = {
@@ -24,10 +38,10 @@ export default async function getImages(types, nbImages = 4) {
   const options = { headers /* mode: 'no-cors' */ };
   const url = new URL(CATS_API_URL);
   url.searchParams.set('mime_types', types);
-  url.searchParams.set('limit', +nbImages);
+  url.searchParams.set('limit', nbImages.toString());
 
-  return fetch(url, options)
+  return fetch(url.toString(), options)
     .then((res) => res.json())
-    .then((res) => res.map((r) => r.url));
+    .then((res: ImageSchema[]) => res.map((r) => r.url));
   // .then((res) => console.log('response', res) || res);
 }
