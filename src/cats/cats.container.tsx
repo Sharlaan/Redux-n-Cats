@@ -1,8 +1,8 @@
 import React from 'react';
-import { useStore } from '../hooks';
+import { useStoreState } from '../store';
 
 export default function CatsContainer() {
-  const { error, isFetching, urls } = useStore(({ cats }) => ({
+  const { error, isFetching, urls } = useStoreState(({ cats }) => ({
     error: cats.error,
     isFetching: cats.isFetching,
     urls: cats.urls,

@@ -23,6 +23,6 @@
     "src"
   ],
   "exclude": [
-    "src/serviceWorker.ts"
+    "src/serviceWorker.js"
   ]
 }

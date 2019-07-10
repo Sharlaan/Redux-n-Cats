@@ -1,42 +1,36 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useActions } from '../hooks';
-import { MimeTypes } from '../_api';
+import React, { useCallback, useState } from 'react';
+import { useStoreActions } from '../store';
+import { MimeTypes } from './cats.service';
 
-const TYPES: MimeTypes[] = ['gif', 'jpg,png', 'jpg,png,gif'];
+const IMG_TYPES: MimeTypes[] = ['gif', 'jpg,png', 'jpg,png,gif'];
 
 const MAX_IMAGES = 10;
 
 export default function CatsSelector() {
-  const changeType = useActions(({ cats }) => cats.getByType);
+  const changeType = useStoreActions(({ cats }) => cats.getByType);
   const [nbImg, setNbImg] = useState(4);
-  const selectEl = useRef(TYPES[0]);
+  const [imgType, setImgType] = useState(IMG_TYPES[0]);
 
-  useEffect(() => {
-    changeType({ type: TYPES[0] });
-  }, []); // called only on mount
-
-  const handleChangeNbImg = ({ target }) => {
-    const newNbImg = Math.min(target.value, MAX_IMAGES);
+  const handleChangeNbImg = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const newNbImg = Math.min(+target.value, MAX_IMAGES);
     setNbImg(newNbImg);
-    changeType({ type: selectEl.current.value, nb: newNbImg });
   };
 
-  const handleChangeImgType = ({ target }) =>
-    changeType({ type: target.value, nb: nbImg });
+  const handleChangeImgType = ({ target }: React.ChangeEvent<HTMLSelectElement>) =>
+    setImgType(target.value as MimeTypes);
 
-  const handleRefresh = () =>
-    changeType({ type: selectEl.current.value, nb: nbImg });
+  const handleRefresh = useCallback(() => changeType({ type: imgType, nb: nbImg }), [
+    changeType,
+    imgType,
+    nbImg,
+  ]);
 
   return (
     <section>
       <input type="number" value={nbImg} onChange={handleChangeNbImg} />
 
-      <select
-        ref={selectEl}
-        /* value={imgType} */
-        onChange={handleChangeImgType}
-      >
-        {TYPES.map((o) => (
+      <select value={imgType} onChange={handleChangeImgType}>
+        {IMG_TYPES.map((o) => (
           <option key={o} value={o}>
             {o}
           </option>

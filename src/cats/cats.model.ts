@@ -1,6 +1,5 @@
-import { Action, Actions, Thunk, thunk } from 'easy-peasy';
-
-import getImages, { MimeTypes } from '../_api';
+import { action, Action, Actions, thunk, Thunk } from 'easy-peasy';
+import getImages, { MimeTypes } from './cats.service';
 
 type State = {
   error: string;
@@ -8,13 +7,13 @@ type State = {
   urls: string[];
 };
 
-type getByTypePayload = { nb: number; type: MimeTypes };
+type GetByTypePayload = { nb: number; type: MimeTypes };
 
 export type CatsModel = State & {
   request: Action<CatsModel>;
   success: Action<CatsModel, CatsModel['urls']>;
   fail: Action<CatsModel, string>;
-  getByType: Thunk<Action<CatsModel, getByTypePayload>>;
+  getByType: Thunk<CatsModel, GetByTypePayload>;
 };
 
 const INITIAL_STATE: Readonly<State> = {
@@ -25,9 +24,9 @@ const INITIAL_STATE: Readonly<State> = {
 
 export default {
   ...INITIAL_STATE,
-  request,
-  success,
-  fail,
+  request: action(request),
+  success: action(success),
+  fail: action(fail),
   getByType: thunk(fetchByType),
 } as CatsModel;
 
@@ -45,10 +44,7 @@ function fail(state: State, payload: string) {
   state.error = payload;
 }
 
-async function fetchByType(
-  actions: Actions<CatsModel>,
-  payload: getByTypePayload,
-) {
+async function fetchByType(actions: Actions<CatsModel>, payload: GetByTypePayload) {
   actions.request(); // dispatch({ type: CATS_REQUESTING });
   try {
     const { type, nb } = payload;

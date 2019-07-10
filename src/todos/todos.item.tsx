@@ -1,16 +1,13 @@
+import { ActionCreatorWithPayload } from 'easy-peasy';
 import React from 'react';
-
-import { TodosModel, Todo } from './todos.model';
+import { Todo } from './todos.model';
 
 interface IListItemProps {
   todo: Todo;
-  remove: TodosModel['remove'];
+  remove: ActionCreatorWithPayload<string, void>;
 }
 
-export default ({
-  todo: { id, text, isCompleted },
-  remove,
-}: IListItemProps) => (
+export default ({ todo: { id, text, isCompleted }, remove }: IListItemProps) => (
   <li id={id.toString()} className={isCompleted ? 'completed' : ''}>
     <span>{text}</span>
     <button

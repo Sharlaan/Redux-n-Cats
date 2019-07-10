@@ -1,4 +1,4 @@
-import { Action } from 'easy-peasy';
+import { action, Action } from 'easy-peasy';
 
 export type Todo = { id: number; text: string; isCompleted: boolean };
 
@@ -12,16 +12,14 @@ export type TodosModel = {
   toggle: Action<TodosModel, string>;
 };
 
-const INITIAL_STATE: ReadonlyArray<Todo> = [
-  { id: 0, text: 'todo 0', isCompleted: false },
-];
+const INITIAL_STATE: ReadonlyArray<Todo> = [{ id: 0, text: 'todo 0', isCompleted: false }];
 
 export default {
-  items: INITIAL_STATE,
-  add,
-  remove,
-  reset,
-  toggle,
+  items: [...INITIAL_STATE],
+  add: action(add),
+  remove: action(remove),
+  reset: action(reset),
+  toggle: action(toggle),
 } as TodosModel;
 
 type State = Pick<TodosModel, 'items'>;
@@ -38,8 +36,7 @@ function remove({ items }: State, payload: string) {
   items.splice(index, 1);
 }
 
-// Note: replacing the state instance with a destructured {items}
-// breaks Immer's proxying
+// Note: replacing the state instance with a destructured {items} breaks Immer's proxying
 function reset(state: State) {
   state.items = [...INITIAL_STATE];
 }

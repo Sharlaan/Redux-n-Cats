@@ -1,11 +1,10 @@
+import { StoreProvider as Provider } from 'easy-peasy';
 import React from 'react';
 import { render } from 'react-dom';
-import { StoreProvider as Provider } from 'easy-peasy';
-
-import store from './store';
 import './index.css';
 import Layout from './layout';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker.js';
+import store from './store';
 
 render(
   <Provider store={store}>

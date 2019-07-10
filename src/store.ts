@@ -1,5 +1,4 @@
 import { createStore } from 'easy-peasy';
-
 import catsModel, { CatsModel } from './cats/cats.model';
 import todosModel, { TodosModel } from './todos/todos.model';
 
@@ -8,10 +7,15 @@ export type StoreModel = {
   todos: TodosModel;
 };
 
-const rootModel = {
+const storeModel: StoreModel = {
   cats: catsModel,
   todos: todosModel,
 };
 
 // redux-devTools are built-in
-export default createStore<StoreModel>(rootModel);
+const store = createStore(storeModel);
+
+const { useStoreActions, useStoreDispatch, useStoreState } = store;
+export { useStoreActions, useStoreDispatch, useStoreState };
+
+export default store;

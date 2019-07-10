@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useActions } from '../hooks';
+import { useStoreActions } from '../store';
 
 const ResetButton = ({ onClick }: { onClick(): void }) => (
   <button type="reset" onClick={onClick}>
@@ -20,7 +20,7 @@ type TextFieldProps = ReturnType<typeof useFormInput>;
 const TextField = (props: TextFieldProps) => <input type="text" {...props} />;
 
 export default function TodosForm() {
-  const { add, reset } = useActions(({ todos }) => ({
+  const { add, reset } = useStoreActions(({ todos }) => ({
     add: todos.add,
     reset: todos.reset,
   }));
@@ -31,7 +31,7 @@ export default function TodosForm() {
     event.preventDefault();
     if (text.value.length) {
       add({ text: text.value, showID: showID.checked });
-      const resetEvent = { target: { value: '' } };
+      const resetEvent = { target: { value: '' } } as React.ChangeEvent<HTMLInputElement>;
       text.onChange(resetEvent);
     }
   };
@@ -50,17 +50,17 @@ export default function TodosForm() {
 }
 
 // Reusable and testable custom hook
-const useFormInput = (initialValue: string) => {
+function useFormInput(initialValue: string) {
   const [value, setValue] = useState(initialValue);
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
   }
   return { value, onChange: handleChange };
-};
+}
 
-const useFormCheckbox = (initialValue: boolean) => {
+function useFormCheckbox(initialValue: boolean) {
   const [value, setValue] = useState(initialValue);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setValue(event.target.checked);
   return { checked: value, onChange: handleChange };
-};
+}
