@@ -1,42 +1,45 @@
-.Todos {
+.main {
   grid-area: Todos;
   padding: 20px;
 }
 
-.Todos form {
+form {
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.Todos form input[type='text'] {
+form input[type='text'] {
   flex: 1;
   margin: 0 10px;
 }
 
-.Todos ul {
+ul {
   list-style: none;
   padding-left: 0;
 }
 
-.Todos li {
+li {
   cursor: pointer;
   border: 1px solid lightgrey;
   padding: 10px;
   display: flex;
 }
-.Todos li:hover {
+li + li {
+  margin-top: 10px;
+}
+li:hover {
   border-color: lightslategrey;
 }
-.Todos li > span {
+li > span {
   flex: 1;
   line-height: 40px;
 }
-.Todos li > button {
+
+.remove-button {
   font-size: x-large;
 }
-
-.Todos .completed {
+.completed {
   text-decoration: line-through;
 }

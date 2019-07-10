@@ -1,12 +1,10 @@
 import React from 'react';
-
-import './todos.styles.css';
-
 import TodosForm from './todos.form';
 import Todos from './todos.list';
+import styles from './todos.module.css';
 
 export default () => (
-  <article className="Todos">
+  <article className={styles.main}>
     <TodosForm />
     <Todos />
   </article>

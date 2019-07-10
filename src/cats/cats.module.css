@@ -1,12 +1,12 @@
-.Cats {
+.main {
   grid-area: Cats;
   padding: 20px;
 }
 
-.Cats select {
+select {
   margin: 20px;
 }
 
-.Cats img {
+img {
   max-width: 300px;
 }
