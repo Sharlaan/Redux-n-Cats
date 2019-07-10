@@ -1,14 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { useStoreActions } from '../store';
-import { MimeTypes } from './cats.service';
-
-const IMG_TYPES: MimeTypes[] = ['gif', 'jpg,png', 'jpg,png,gif'];
-
-const MAX_IMAGES = 10;
+import { DEFAULT_NB_IMG, IMG_TYPES, MAX_IMAGES, MimeTypes } from './cats.constants';
 
 export default function CatsSelector() {
   const changeType = useStoreActions(({ cats }) => cats.getByType);
-  const [nbImg, setNbImg] = useState(4);
+  const [nbImg, setNbImg] = useState(DEFAULT_NB_IMG);
   const [imgType, setImgType] = useState(IMG_TYPES[0]);
 
   const handleChangeNbImg = ({ target }: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-export type MimeTypes = 'gif' | 'jpg,png' | 'jpg,png,gif';
+import { CATS_API_KEY, CATS_API_URL, DEFAULT_NB_IMG, MimeTypes } from './cats.constants';
 
 // Cats API Docs : https://docs.thecatapi.com/api-reference/images/images-get
 type ImageSchema = {
@@ -11,11 +11,7 @@ type ImageSchema = {
   breeds: object[];
 };
 
-const CATS_API_URL = 'https://api.thecatapi.com/v1/images/search';
-
-const CATS_API_KEY = 'cf73a31c-2ec9-4d54-845b-6f0acba615d3';
-
-export default async function getImages(types: MimeTypes, nbImages = 4) {
+export async function getImages(types: MimeTypes, nbImages = DEFAULT_NB_IMG) {
   // axios.defaults.headers.common['x-api-key'] = CATS_API_KEY; // Replace this with your API Key
 
   // const params = {

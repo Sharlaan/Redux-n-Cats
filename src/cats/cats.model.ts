@@ -1,5 +1,6 @@
 import { action, Action, Actions, thunk, Thunk } from 'easy-peasy';
-import getImages, { MimeTypes } from './cats.service';
+import { MimeTypes } from './cats.constants';
+import { getImages } from './cats.service';
 
 type State = {
   error: string;
