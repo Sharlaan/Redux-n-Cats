@@ -1,20 +1,21 @@
 import React from 'react';
-
-import './App.css';
-import ReactHeader from './AppHeader.React';
-import CatsHeader from './AppHeader.Cats';
-import Todos from '../todos';
 import Cats from '../cats';
+import Todos from '../todos';
+import './App.css';
+import CatsHeader from './AppHeaderCats';
+import ReactHeader from './AppHeaderReact';
 
-export default () => (
-  <>
-    <header className="App-header">
-      <ReactHeader />
-      <CatsHeader />
-    </header>
+export default function Layout() {
+  return (
+    <>
+      <header className="App-header">
+        <ReactHeader />
+        <CatsHeader />
+      </header>
 
-    <Todos />
+      <Todos />
 
-    <Cats />
-  </>
-);
+      <Cats />
+    </>
+  );
+}

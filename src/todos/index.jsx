@@ -4,11 +4,13 @@ import Todos from './todos.list';
 import styles from './todos.module.css';
 import TodosProvider from './todos.provider';
 
-export default () => (
-  <article className={styles.main}>
-    <TodosProvider>
-      <TodosForm />
-      <Todos />
-    </TodosProvider>
-  </article>
-);
+export default function TodosSection() {
+  return (
+    <article className={styles.main}>
+      <TodosProvider>
+        <TodosForm />
+        <Todos />
+      </TodosProvider>
+    </article>
+  );
+}

@@ -4,11 +4,13 @@ import styles from './cats.module.css';
 import CatsProvider from './cats.provider';
 import CatsSelector from './cats.selector';
 
-export default () => (
-  <article className={styles.main}>
-    <CatsProvider>
-      <CatsSelector />
-      <Cats />
-    </CatsProvider>
-  </article>
-);
+export default function CatsSection() {
+  return (
+    <article className={styles.main}>
+      <CatsProvider>
+        <CatsSelector />
+        <Cats />
+      </CatsProvider>
+    </article>
+  );
+}
