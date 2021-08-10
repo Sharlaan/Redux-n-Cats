@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { remove, toggle } from './todos.actions';
 import ListItem from './todos.item';
 
-export default () => {
+export default function TodosList() {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
+
   return (
     <ul onClick={(event) => dispatch(toggle(event.target.closest('li').id))}>
       {todos.length ? (
@@ -22,4 +23,4 @@ export default () => {
       )}
     </ul>
   );
-};
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-export default () => {
+export default function CatsContainer() {
   const { error, isFetching, urls } = useSelector(({ cats: { error, isFetching, urls } }) => ({
     error,
     isFetching,
@@ -27,4 +27,4 @@ export default () => {
       ))}
     </section>
   );
-};
+}
