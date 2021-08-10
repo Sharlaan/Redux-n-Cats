@@ -59,3 +59,7 @@ Project boostrapped with create-react-app v2
 - [TodoList] Add todo editing with `onDblClick`
 - [TodoList] Add a filter
 - [Cats] Add a filter to choose particular images, supporting wildcards
+
+## Related articles
+
+[Top 6 React State Management 2022](https://blog.openreplay.com/top-6-react-state-management-libraries-for-2022)
