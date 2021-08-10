@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 const TYPES = ['gif', 'jpg,png', 'jpg,png,gif'];
@@ -12,7 +12,7 @@ function CatsSelector({ changeType }) {
 
   useEffect(() => {
     changeType(TYPES[0], DEFAULT_NB_IMAGES);
-  }, []); // Called only on mount
+  }, [changeType]); // Called only on mount
 
   const handleChangeNbImg = ({ target }) => {
     const newNbImg = Math.min(target.value, MAX_IMAGES);
@@ -47,7 +47,4 @@ const mapDispatch = ({ cats: { fetchByType } }) => ({
   changeType: (type, nb) => fetchByType({ type, nb }),
 });
 
-export default connect(
-  null,
-  mapDispatch,
-)(CatsSelector);
+export default connect(null, mapDispatch)(CatsSelector);

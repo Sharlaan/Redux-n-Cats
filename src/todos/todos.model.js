@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = [{ id: 0, text: 'todo 0', isCompleted: false }];
 
-export default {
+const todosStore = {
   state: INITIAL_STATE,
   reducers: {
     add(state, payload) {
@@ -19,3 +19,5 @@ export default {
     }),
   },
 };
+
+export default todosStore;

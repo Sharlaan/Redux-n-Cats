@@ -1,12 +1,13 @@
 import React from 'react';
-
-import './cats.styles.css';
-import CatsSelector from './cats.selector';
 import Cats from './cats.container';
+import CatsSelector from './cats.selector';
+import './cats.styles.css';
 
-export default () => (
-  <article className="Cats">
-    <CatsSelector />
-    <Cats />
-  </article>
-);
+export default function CatsSection() {
+  return (
+    <article className="Cats">
+      <CatsSelector />
+      <Cats />
+    </article>
+  );
+}

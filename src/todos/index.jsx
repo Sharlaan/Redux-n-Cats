@@ -1,13 +1,13 @@
 import React from 'react';
-
-import './todos.styles.css';
-
 import TodosForm from './todos.form';
 import Todos from './todos.list';
+import './todos.styles.css';
 
-export default () => (
-  <article className="Todos">
-    <TodosForm />
-    <Todos />
-  </article>
-);
+export default function TodosSection() {
+  return (
+    <article className="Todos">
+      <TodosForm />
+      <Todos />
+    </article>
+  );
+}

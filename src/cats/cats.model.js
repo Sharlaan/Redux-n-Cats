@@ -1,5 +1,4 @@
 import produce from 'immer';
-
 import getImages from '../_api';
 
 const INITIAL_STATE = {
@@ -8,7 +7,7 @@ const INITIAL_STATE = {
   urls: [],
 };
 
-export default {
+const catsStore = {
   state: INITIAL_STATE,
   reducers: {
     requesting: produce((state) => {
@@ -37,3 +36,5 @@ export default {
     },
   }),
 };
+
+export default catsStore;
