@@ -1,4 +1,4 @@
-import { createStore } from 'easy-peasy';
+import { createStore, createTypedHooks } from 'easy-peasy';
 import catsModel, { CatsModel } from './cats/cats.model';
 import todosModel, { TodosModel } from './todos/todos.model';
 
@@ -15,7 +15,7 @@ const storeModel: StoreModel = {
 // redux-devTools are built-in
 const store = createStore(storeModel);
 
-const { useStoreActions, useStoreDispatch, useStoreState } = store;
+const { useStoreActions, useStoreDispatch, useStoreState } = createTypedHooks<StoreModel>();
 export { useStoreActions, useStoreDispatch, useStoreState };
 
 export default store;

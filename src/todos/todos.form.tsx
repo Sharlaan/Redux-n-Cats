@@ -38,7 +38,7 @@ export default function TodosForm() {
 
   return (
     <section>
-      <ResetButton onClick={() => reset()} />
+      <ResetButton onClick={reset} />
 
       <form onSubmit={handleSubmit}>
         <Checkbox {...showID} />

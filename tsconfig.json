@@ -7,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "noEmit": true,
     "strict": true,
     "moduleResolution": "node",
@@ -17,7 +17,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

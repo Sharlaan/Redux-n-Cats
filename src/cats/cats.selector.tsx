@@ -15,11 +15,10 @@ export default function CatsSelector() {
   const handleChangeImgType = ({ target }: React.ChangeEvent<HTMLSelectElement>) =>
     setImgType(target.value as MimeTypes);
 
-  const handleRefresh = useCallback(() => changeType({ type: imgType, nb: nbImg }), [
-    changeType,
-    imgType,
-    nbImg,
-  ]);
+  const handleRefresh = useCallback(
+    () => changeType({ type: imgType, nb: nbImg }),
+    [changeType, imgType, nbImg],
+  );
 
   return (
     <section>

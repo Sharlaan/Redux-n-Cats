@@ -23,7 +23,7 @@ const INITIAL_STATE: Readonly<State> = {
   urls: [],
 };
 
-export default {
+const catsStore = {
   ...INITIAL_STATE,
   request: action(request),
   success: action(success),
@@ -55,3 +55,5 @@ async function fetchByType(actions: Actions<CatsModel>, payload: GetByTypePayloa
     return actions.fail(error.message); // dispatch({ type: CATS_FAILED, payload: error.message });
   }
 }
+
+export default catsStore;

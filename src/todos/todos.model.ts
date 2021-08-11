@@ -14,7 +14,7 @@ export type TodosModel = {
 
 const INITIAL_STATE: ReadonlyArray<Todo> = [{ id: 0, text: 'todo 0', isCompleted: false }];
 
-export default {
+const todosStore = {
   items: [...INITIAL_STATE],
   add: action(add),
   remove: action(remove),
@@ -46,3 +46,5 @@ function toggle({ items }: State, payload: string) {
   if (!todo) return;
   todo.isCompleted = !todo.isCompleted;
 }
+
+export default todosStore;
