@@ -1,5 +1,5 @@
+import { useStoreActions } from 'easy-peasy';
 import React, { useState } from 'react';
-import { useActions } from 'easy-peasy';
 
 const ResetButton = ({ onClick }) => (
   <button type="reset" onClick={onClick}>
@@ -18,7 +18,7 @@ const Checkbox = (props) => <input type="checkbox" {...props} />;
 const TextField = (props) => <input type="text" {...props} />;
 
 export default function TodosForm() {
-  const { add, reset } = useActions(({ todos }) => ({
+  const { add, reset } = useStoreActions(({ todos }) => ({
     add: todos.add,
     reset: todos.reset,
   }));
@@ -32,7 +32,7 @@ export default function TodosForm() {
 
   return (
     <section>
-      <ResetButton onClick={() => reset()} />
+      <ResetButton onClick={reset} />
 
       <form onSubmit={handleSubmit}>
         <Checkbox {...showID} />

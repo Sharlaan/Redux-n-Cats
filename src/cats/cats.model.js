@@ -1,5 +1,4 @@
-import { thunk } from 'easy-peasy';
-
+import { action, thunk } from 'easy-peasy';
 import getImages from '../_api';
 
 const INITIAL_STATE = {
@@ -8,11 +7,11 @@ const INITIAL_STATE = {
   urls: [],
 };
 
-export default {
+const catsStore = {
   ...INITIAL_STATE,
-  request,
-  success,
-  fail,
+  request: action(request),
+  success: action(success),
+  fail: action(fail),
   getByType: thunk(fetchByType),
 };
 
@@ -40,3 +39,5 @@ async function fetchByType(actions, payload) {
     return actions.fail(error.message); // dispatch({ type: CATS_FAILED, payload: error.message });
   }
 }
+
+export default catsStore;

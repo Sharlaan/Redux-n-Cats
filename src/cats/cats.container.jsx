@@ -1,8 +1,8 @@
+import { useStoreState } from 'easy-peasy';
 import React from 'react';
-import { useStore } from 'easy-peasy';
 
 export default function CatsContainer() {
-  const { error, isFetching, urls } = useStore(({ cats }) => ({
+  const { error, isFetching, urls } = useStoreState(({ cats }) => ({
     error: cats.error,
     isFetching: cats.isFetching,
     urls: cats.urls,

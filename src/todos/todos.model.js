@@ -1,11 +1,13 @@
+import { action } from 'easy-peasy';
+
 const INITIAL_STATE = [{ id: 0, text: 'todo 0', isCompleted: false }];
 
-export default {
+const todosStore = {
   items: INITIAL_STATE,
-  add,
-  remove,
-  reset,
-  toggle,
+  add: action(add),
+  remove: action(remove),
+  reset: action(reset),
+  toggle: action(toggle),
 };
 
 function add({ items }, payload) {
@@ -31,3 +33,5 @@ function toggle({ items }, payload) {
   if (!todo) return;
   todo.isCompleted = !todo.isCompleted;
 }
+
+export default todosStore;
